@@ -3,7 +3,7 @@ from telebot import types
 import mysql.connector
 import datetime
 
-bot = telebot.TeleBot('1008146704:AAGQkpOX8NSL9pcEKb5-93OK0OVqdR_oUSk')
+bot = telebot.TeleBot('API_KEY')
 
 @bot.message_handler(commands=['start'])
 def start(message):
