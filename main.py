@@ -33,10 +33,10 @@ def profession(message):
     global msg
     msg = message.text[0:2]
     user_markup=telebot.types.ReplyKeyboardMarkup(True,False)
-    db = mysql.connector.connect(host= "185.178.45.37",  \
-                                 user= "cweb_cweb_test2",\
-                                 password= "OkAfKmMbNg", \
-                                 db= "cweb_cweb_test2"   ) 
+    db = mysql.connector.connect(host= "host",     \
+                                    user= "user",\
+                                    password= "password", \
+                                    db= "db"   ) 
     cur=db.cursor() 
     cur.execute(f"SELECT cvs.filename, cvs.id, cvs.name, cvs.surname \
                 FROM cvs                             \
@@ -51,7 +51,7 @@ def profession(message):
     bot.send_message(message.from_user.id,"suitable employees")
     for res in result:
         bot.send_message(message.from_user.id,f"{res[2]} {res[3]}")
-        bot.send_message(message.from_user.id,f"https://cvweb.ru/uploads/cv/{res[0]}.pdf")
+        bot.send_message(message.from_user.id,f"Your_Link")
     quest = 'Do You want to continue filtering?'  
     user_markup.row('Yes')
     user_markup.row('No')
@@ -79,10 +79,10 @@ def experience(message):
     user_markup.row('/start','/stop')
     user_markup.row('location','about')
     user_markup.row('search')
-    db = mysql.connector.connect(host= "185.178.45.37",     \
-                                    user= "cweb_cweb_test2",\
-                                    password= "OkAfKmMbNg", \
-                                    db= "cweb_cweb_test2"   ) 
+    db = mysql.connector.connect(host= "host",     \
+                                    user= "user",\
+                                    password= "password", \
+                                    db= "db"   ) 
     cur=db.cursor()
     cur.execute(f"SELECT cvs.filename,  cvs.id, cvp.profession_id, pro.id,cvs.name, cvs.surname, cv_exp.start, \
                             cv_exp.end, TIMESTAMPDIFF(year,cv_exp.start,IF(cv_exp.end is NULL,CURDATE(),cv_exp.end)) \
@@ -100,7 +100,7 @@ def experience(message):
     for res in result:
         if  res[8] >= int(message.text):
             bot.send_message(message.from_user.id,f"{res[4]} {res[5]}")
-            bot.send_message(message.from_user.id,f"https://cvweb.ru/uploads/cv/{res[0]}.pdf")
+            bot.send_message(message.from_user.id,f"Your_Link")
     bot.send_message(message.from_user.id,'Thanks for using our BOT :)',reply_markup=user_markup)
 bot_name=bot.get_me()
 print(bot_name.first_name +' at your service....')
